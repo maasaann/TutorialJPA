@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping; // 追加
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam; // 追加
 
-@Controller
+@Controller //ここでコントローラーと識別
 @RequestMapping("country")
 public class CountryController {
     private final CountryService service;
@@ -26,10 +26,10 @@ public class CountryController {
         return "country/list";
     }
 
-    // ----- 追加:ここから -----
     // ----- 詳細画面 -----
-    @GetMapping(value = { "/detail", "/detail/{code}/" })
-    public String getCountry(@PathVariable(name = "code", required = false) String code, Model model) {
+    @GetMapping(value = { "/detail", "/detail/{code}" })
+    public String getCountry(
+            @PathVariable(name = "code", required = false) String code, Model model) {
         // codeが指定されていたら検索結果、無ければ空のクラスを設定
         Country country = code != null ? service.getCountry(code) : new Country();
         // Modelに登録
@@ -60,15 +60,23 @@ public class CountryController {
         return "country/delete";
     }
 
-    // ----- 削除 -----
+    // ----- 削除1 -----
     @PostMapping("/delete")
-    public String deleteCountry(
-            @RequestParam("code") String code, Model model) {
+    public String deleteCountry1(@RequestParam("code") String code, Model model) {
         // 削除
         service.deleteCountry(code);
 
         // 一覧画面にリダイレクト
         return "redirect:/country/list";
     }
-    // ----- 追加:ここまで -----
+
+    // ----- 削除2 list(Country一覧)画面から -----
+    @GetMapping("/delete/{code}")
+    public String deleteCountry2(@PathVariable("code") String code, Model model) {
+        // 削除
+        service.deleteCountry(code);
+
+        // 一覧画面にリダイレクト
+        return "redirect:/country/list";
+    }
 }

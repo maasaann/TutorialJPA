@@ -6,7 +6,7 @@ import java.util.Optional; // 追加
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional; // 追加
 
-@Service
+@Service //ここでServiceクラスと識別
 public class CountryService {
     private final CountryRepository repository;
 
@@ -20,7 +20,6 @@ public class CountryService {
         return repository.findAll();
     }
 
-    // ----- 追加:ここから -----
     // 1件を検索して返す
     public Country getCountry(String code) {
         // findByIdで検索
@@ -42,5 +41,4 @@ public class CountryService {
     public void deleteCountry(String code) {
         repository.deleteById(code);
     }
-    // ----- 追加:ここまで -----
 }

@@ -1,3 +1,4 @@
+//これは「エンティティ」。DB上のこのcountryテーブル使用
 package com.techacademy;
 
 import jakarta.persistence.Entity;
