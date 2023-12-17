@@ -12,10 +12,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="country")
-public class Country {
+@Table(name="test_t")
+public class test_t {
     @Id
-    private String code;
-    private String name;
-    private int population;
+    private String aaa;
+    private String bbb;
 }
