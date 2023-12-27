@@ -72,11 +72,13 @@ public class CountryController {
 
     // ----- 削除2 list(Country一覧)画面から -----
     @GetMapping("/delete/{code}")
-    public String deleteCountry2(@PathVariable("code") String code, Model model) {
-        // 削除
-        service.deleteCountry(code);
+    public String deleteCountry2(
+            @PathVariable(name = "code", required = false) String code, Model model) {
+
+        // Modelに登録
+        model.addAttribute("code", code);
 
         // 一覧画面にリダイレクト
-        return "redirect:/country/list";
+        return "country/delete";
     }
 }

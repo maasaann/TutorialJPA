@@ -38,7 +38,7 @@ public class CountryService {
 
     // 削除を行なう
     @Transactional
-    public void deleteCountry(String code) {
+    public Country deleteCountry(String code) {
         repository.deleteById(code);
     }
 }
